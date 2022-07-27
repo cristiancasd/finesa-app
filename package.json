@@ -1,9 +1,19 @@
 
 {
+
+  "name": "finesa-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "18.x",
+    "npm": "8.x"
+  },
+
   "scripts": {
     "start": "node app.js"
   },
-  
+
   "dependencies": {
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
