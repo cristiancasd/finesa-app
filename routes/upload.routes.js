@@ -17,7 +17,6 @@ router.put('/:coleccion/:id', [                              //Editar, recibo la
     validarArchivoSubir,                                      //Valido archivo en el body
     validarCampos
     ],actualizarImagenCloudinary)
-//], actualizarImagen);                                         //Guardo la imagén y borro la anterior
 
 
 module.exports= router;

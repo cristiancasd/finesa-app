@@ -25,6 +25,7 @@ router.get('/',[
 ventasGet);                               //Solicitud para mostrar los usuarios
 
 
+
 router.post('/',[
     validarJWT,
     check('arraySale', 'El vector es obligatorio').not().isEmpty(),

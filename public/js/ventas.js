@@ -286,7 +286,8 @@ const editar_db = async(arreglo) =>{
     let enlace='';
     let crud='POST';
     
-    let fecha=d.getDate()+'-'+(Number(d.getMonth())+1 ) +'-'+ d.getFullYear()
+    let fecha=d.getFullYear()+'-'+(Number(d.getMonth())+1 ) +'-'+ d.getDate()
+
     let hora=d.getHours()+':'+ d.getMinutes()+':'+d.getSeconds()
 
     enlace=enlaceVentas;

@@ -33,13 +33,14 @@
                         <option value="editarProd" >        Editar Producto </option>
                         <option value="verProduct">            Ver Producto </option>
                         <option value="eliminarProd">       Eliminar Producto </option>
-                      </optgroup>                        
+                      </optgroup>                      
                     
 
                     
                     
-                    <optgroup label="Buscar">
-                        <option value="buscar">          Buscar  </option>                       
+                    <optgroup label="Carritos">
+                        <option value="verCarritos">    Ver Carritos  </option> 
+                        <option value="buscarFecha">      Buscar día Carrito  </option> 
                     </optgroup> 
 
                 </select>
@@ -157,24 +158,29 @@
     <!-- BUSCAR -->
     <div class="row " style="justify-content: center ; ">
         <div class="col" style="justify-content: center" id="divBuscar">
-            <form  id='formBuscar' class="d-grid" style="justify-content: center; " > 
+            <form  id='formBuscarFechas' class="d-grid" style="justify-content: center; " > 
 
                 <hr>
                 <h5 >Buscar</h5>
-                <select class="selectpicker" id="buscar" >                        
-                    <option value=/api/buscar/usuarios/  >  Usuario  </option>
-                    <option value=/api/buscar/productos/ >  Producto </option>   
-                    <option value=/api/buscar/categorias/ >  Categoría </option>                         
-                </select>  
+
                 <br>
                     <input 
-                    id="buscarInput" 
-                    type="text" 
-                    name="buscarInput" 
+                    id="fechaForm1" 
+                    type="date" 
+                    name="fechaForm1" 
                     class="form-control mb-2" 
-                    placeholder="Escriba para buscar"
+                    placeholder="AAAA-MM-DD"
                     required 
-                    >                
+                    >   
+                    
+                    <input 
+                    id="fechaForm2" 
+                    type="date" 
+                    name="fechaForm2" 
+                    class="form-control mb-2" 
+                    placeholder="AAAA-MM-DD"
+                    required 
+                    >
                     
                     <button   id="button_search" type="submit" class = "btn btn-primary">
                         Buscar

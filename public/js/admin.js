@@ -1,12 +1,5 @@
 
 
-/*const divMostrarBusqueda = document.querySelector('#divMostrarBusqueda');
-const divBuscar          = document.querySelector('#divBuscar');
-const divCateProd        = document.querySelector('#divCateProd');
-const divUsuarios        = document.querySelector('#divUsuarios');
-const divFormImg         = document.querySelector('#divFormImg');
-const divFormDatos       = document.querySelector('#divFormDatos');*/
-
 
 const fileuploadP       = document.querySelector('#fileuploadP');
 const upload_buttonP       = document.querySelector('#upload_buttonP');
@@ -17,6 +10,7 @@ let usuario = null;
 const enlaceAuth='/api/auth/' 
 const enlaceProducto='/api/products/'      
 const enlaceSubirPC='/api/uploads/' 
+const enlaceCarrito='/api/shopingCarts/' 
 
 
 
@@ -41,7 +35,7 @@ const validarJWT = async() => {
     if(userDb.rol!='ADMIN_ROLE') window.location='index.html'
     
     document.title = 'ADMIN '+usuario.nombre; //El texto de la pestaña de chat.html
-    fotoUser.src='/js/goku.png'
+
     parametrosIniciales(seleccion.value) //parametrosUsuario();
 } 
 
@@ -74,6 +68,7 @@ const parametrosIniciales=async(accion)=>{
     upload_buttonP.style.display='none';
 
     await actualizarProductos()
+    await actualizarCarritos()
 
     switch(accion){        
 
@@ -131,14 +126,24 @@ const parametrosIniciales=async(accion)=>{
             nombreProducto.disabled=true;
             precio.disabled=true;
             disponible.disabled=true;
-            descripcion.disabled=true;
-
-
-
-            
-            
+            descripcion.disabled=true;            
 
         break;  
+
+        case 'verCarritos':
+            estoyEn.innerHTML= 'Mostrar Todos los Carritos';
+            mostrarCarritosCompras(ventasCarrito);
+        break;
+
+        
+
+
+        case 'buscarFecha'  : 
+            divBuscar.style.display='block';
+            estoyEn.innerHTML= 'Buscar Carrito FECHAS';
+            funcionActual='buscarFecha';                         
+        break;  
+
         default:
             estoyEn.innerHTML= 'FUNCIÓN NO ESTABLECIDA';
             return console.log('accion es ',accion);
@@ -424,6 +429,126 @@ const actualizarProductos=async ()=>{
     })        
     selectProductoHTML.innerHTML=cateHtml;
     console.log('prodObj ', prodObj)
+}
+
+let carritoObj={}
+let ventasCarrito=[]
+const actualizarCarritos=async ()=>{
+    const resp = await fetch(enlaceCarrito,{
+        headers:{
+            'Content-Type':'application/json',
+            'c-token':localStorage.getItem('token')
+        }
+    });    
+    const {ventas}= await resp.json(); 
+    ventas.forEach((valor)=>{
+        carritoObj[valor.uid]=valor;
+    })
+    console.log('carritoObj ', carritoObj)
+    ventasCarrito=[...ventas]
+
+}
+
+let carritoBusqueda=[]
+formBuscarFechas.addEventListener('submit', ev=>{
+    carritoBusqueda=[]
+    ev.preventDefault();   
+
+
+    let datas = Object.keys(carritoObj); // claves = ["nombre", "color", "macho", "edad"]
+
+
+    for(let i=0; i< datas.length; i++){
+        let data = datas[i];
+        const valor=carritoObj[data]
+
+        estaEnRangoFecha(fechaForm1.value,fechaForm2.value,valor.date)            
+            ? carritoBusqueda.push(valor)
+            : console.log('NO está en el rango')         
+    }
+    console.log('carritoBusqueda ',carritoBusqueda)
+    
+    mostrarCarritosCompras(carritoBusqueda);
+
+})
+
+
+
+const mostrarCarritosCompras = async(arregloVentas) =>{
+    divMostrarBusqueda.style.display='block';
+
+    //console.log('estoy en mostrarPedidosCreados')
+    let tabla_pedidoActual=`
+    <table class="table table-dark" >
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">No ID carrito</th>
+        <th scope="col">Fecha</th>
+        <th scope="col">Productos</th>
+        <th scope="col">Cantidad</th>
+        <th scope="col">Total</th>
+        <th scope="col">Creado Por User</th>
+    </tr>
+    </thead>
+    <tbody>  
+    `
+    arregloVentas.forEach((data,i)=>{
+
+                data.arraySale.forEach((valorTemp,v)=>{
+
+                    tabla_pedidoActual+=`
+                    <tr>
+                        <th scope="row">${i+1} </th>
+                        <td>${data.uid}</td> 
+                        <td>${data.date}</td>                                               `
+
+                    let nombres = Object.keys(valorTemp.pedido); 
+                    let prodHtml='';
+                    let cantHtlm='';
+                    for(let ii=0; ii< nombres.length; ii++){
+                        let nombre = nombres[ii];
+                        prodHtml+=
+                        `
+                            ${nombre}<br>                      
+                        `
+                        cantHtlm+=
+                        `
+                        ${valorTemp.pedido[nombre].cantidad}<br>                         
+                        `
+                    }
+
+                    tabla_pedidoActual+=
+                    '<td>' + prodHtml  +  '</td> ' +
+                    '<td>' + cantHtlm +  '</td>'
+                    
+                    tabla_pedidoActual+=`
+                        <td>${data.arraySale[v].total}</td>
+                        <td>${data.userCart}</td>
+                    `
+                    tabla_pedidoActual+=`
+                </tr>
+                `
+                })          
+    })
+    tabla_pedidoActual+=`
+    </tbody>
+    </table>`
+
+    resultadoBusqueda.innerHTML=tabla_pedidoActual 
+
+    
+}
+
+
+
+
+
+const estaEnRangoFecha = (fecha1='2020-10-23',fecha2='2022-10-22',fechaBusqueda='2021-10-22') => {
+    const date1 = new Date(fecha1);
+    const date2 = new Date(fecha2);
+    const dateBusqueda = new Date(fechaBusqueda); 
+    return (dateBusqueda>=date1 &&dateBusqueda<=date2 )
 }
 
 

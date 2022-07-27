@@ -10,11 +10,11 @@ const ventasGet = async (req, res) =>{
 
     //Es más optimo ya que se hacen los procesos paralelos
     const [total,ventas] = await Promise.all([
-        Cart.countDocuments({estado:true}),
-        Cart.find({estado:true})                         //La condición retorna solo los que esten en true
+        Cart.countDocuments({carState:true}),
+        Cart.find({carState:true})                         //La condición retorna solo los que esten en true
             
     ]);
-
+ 
     
     
     res.json({                                                //La respuesta es una colección de dos respustas
