@@ -153,7 +153,7 @@ loginManual.addEventListener('submit', ev=>{
         divUserLog.style.display='none'
         google_signout.style.display='block'
         localStorage.setItem('token',data.token);//token al localstorage
-        verRole(data.usuario.rol, data.usuario.name)
+        verRole(data.user.rol, data.user.name)
         
 
         //window.location='chat.html';//Redirecciono al chat
