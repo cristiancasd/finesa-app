@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+<body class="container" >
+   
+
+
+    <div class="row mt-5 " style="justify-content: center">
+        <div class="col-sm-6" style="justify-content: center">
+            
+            <form   class="d-grid" >
+                <a href="chat.html" class="btn btn-outline-danger">
+                    Volver al Chat
+                </a>            
+            </form>
+
+
+            <form  id='formSubirImagen' class="d-grid" style="justify-content: center"> 
+
+                <hr>
+                <h3>Cambiar Foto de Perfil</h3>
+
+                <img id="fotoUser" src='' width="300" height="300">
+                <br>
+                <input id="fileupload" type="file" name="fileupload" />  
+                <br>  
+                <button id="upload_button"  type="submit" 
+                class = "btn btn-primary"
+                style="display: none;"> Cambiar Foto</button>
+            </form>
+            <br>
+            
+            
+
+            <form  id='formCambiarDatos' class="d-grid" style="justify-content: center">
+            <hr>            
+            <h3>Cambiar datos Personales</h3>
+            
+            <br>
+                <input 
+                id="nombre" 
+                type="text" 
+                name="nombre" 
+                class="form-control mb-2" 
+                placeholder="Nombre" 
+                required>
+                
+                <input 
+                id="password" 
+                type="password" 
+                name="password" 
+                class="form-control mb-2" 
+                placeholder="contraseña" 
+                required>
+
+                <input 
+                id="password2" 
+                type="password" 
+                name="password2" 
+                class="form-control mb-2" 
+                placeholder="confirme Contraseña" 
+                required>
+
+
+
+                <button   id="change_button" type="submit" class = "btn btn-primary">
+                    Editar Perfil
+                </button>
+            </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/editarperfil.js"></script> 
+
+</body>
+</html>

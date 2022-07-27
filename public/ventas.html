@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADMIN</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+</head>
+<body class="container"  style="background-color: black;">
+
+    <!-- Seleccionar Funcion -->
+    <div class="row mt-5 " style="justify-content: center; ">
+        <div class="col-sm-6" style="justify-content: center">
+
+
+            <form   class="d-grid" >
+                <a href="index.html" class="btn btn-outline-danger">
+                    Volver al Index
+                </a> 
+                <hr>           
+            </form>
+            <br> 
+
+            <h2 id="estoyEn"style="text-align: center; ">Carrito de Compras </h2>
+        </div>
+    </div>
+
+    <!-- Div tabla Pedido Actual-->
+    <div id="div_tabla_pedidoActual">
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">V. Parcial</th>
+            </tr>
+            </thead>
+           
+        </table>
+    </div>
+    
+    <!-- ver categorias y productos -->
+    <div class="row mt-5" style="justify-content:center;" id="divCateProd" >
+        <div class="row mt-5" style="justify-content: center" >
+            <div  style=" background-color: black" >
+                
+                
+                <button id="button_montarPedido"  onclick="montarPedido()"  type="button" class =   "btn btn-primary btn-lg btn-block">Montar Pedido</button>
+                <button id="button_borrarCarrito"  onclick="borrarCarrito()"  type="button" class = "btn btn-outline-primary btn-lg btn-block">Vaciar Carrito</button>
+
+                <br>
+                <h2>Productos</h2>
+                <hr>
+
+                <section id="cateProductos" 
+                        style="border:1px solid white;
+                               overflow:hidden;
+                               text-align: center; 
+                       " >                     
+                </section>
+                 
+            </div>
+        </div>
+    </div> 
+ 
+   
+
+  
+
+
+    <script src="./js/ventas.js"></script> 
+
+</body>
+</html>
