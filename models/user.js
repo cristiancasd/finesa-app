@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-//Objetos con las caracteristicas del usuario
 const UserSchema = Schema({
     name:{
         type:String,
@@ -19,11 +18,11 @@ const UserSchema = Schema({
     rol:{
         type:String,
         required:true,
-        enum:['ADMIN_ROLE','USER_ROLE',"VENTAS_ROLE"]
+        enum:['ADMIN_ROLE','USER_ROLE',"SALE_ROLE"]
     },
-    userState:{ //Cuando cree un usuario va a estar activado
+    userState:{ 
         type:Boolean, 
-        default:true// cuando se elimina el usuario pasa a false
+        default:true
     },
     google:{
         type:Boolean,
@@ -35,11 +34,9 @@ const UserSchema = Schema({
 //Ocultar la clave y la versión de la respuesta del backend
 //retornamos es información si se necesita
 UserSchema.methods.toJSON = function() {
-    const {__v, password,_id, ...user}=this.toObject();      //Retiramos el id , password, _v de la variable usuario
-    user.uid=_id;                                            //renombro _id a uid
+    const {__v, password,_id, ...user}=this.toObject();      
+    user.uid=_id;                                           
     return user;
 }
 
-//MOnggole por defecto coloca por defecto a la colección
-//una S ... es decir será Usuarios
 module.exports=model('User',UserSchema);

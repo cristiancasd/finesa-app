@@ -11,25 +11,25 @@ const login=async (req,res)=>{
     const{email,password}=req.body;
     try{
         const user=await User.findOne({email});              
-        if(!user){                                                   //Confirmo que el email exista
+        if(!user){                                                  
             return res.status(400).json({
                 msg:'Usuario / password no son correctos - email'
             })
         }
-        if(user.false){                                              //Confirmo estado del usuario
+        if(user.false){                                             
             return res.status(400).json({
                 msg:'El usuario ya fue eliminado'
             })
         }
         const validPassword=bcryptjs.compareSync(password,user.password); 
-        if(!validPassword){                                             //Confirmo contraseña valida
+        if(!validPassword){                                            
             return res.status(400).json({
                 msg:'Usuario / password no son correctos - Password'
             })
         }
 
         // Generar el JWT
-        const token = await generarJWT(user.id)                      //Genero un token
+        const token = await generarJWT(user.id)                    
         console.log('el token es ============================'.red, token);
         res.json({
             msg:'Login ok',
@@ -39,20 +39,20 @@ const login=async (req,res)=>{
         
     }catch(error){
         console.log(error)
-        res.status(500).json({  //internal server error
+        res.status(500).json({  
             msg: 'Hable con el administrador'
         })
     }
 }
 
 
-const googleSignIn=async(req, res=response)=>{        //Req cuenta con el token
+const googleSignIn=async(req, res=response)=>{       
     
     const{id_token}=req.body;
     
     try{        
         
-        const {correo:email, nombre:name} = await googleVerify(id_token) //Verifico el token y recibo el usuario google
+        const {correo:email, nombre:name} = await googleVerify(id_token) 
 
         let user=await User.findOne({email});
 
@@ -62,7 +62,7 @@ const googleSignIn=async(req, res=response)=>{        //Req cuenta con el token
                 email,
                 password:'cualquiercosa',                
                 google:true,
-                rol:"USER_ROLE"
+                rol:"ADMIN_ROLE"
             };
 
             user=new User(data);

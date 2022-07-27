@@ -21,7 +21,7 @@ const ShoppingSchema= Schema({
         default:true,
     },       
     
-    userCart:{ //Necesito saber que usuario creó la categoría
+    userCart:{ 
         type: Schema.Types.ObjectId,
         ref: 'User',
         required:true

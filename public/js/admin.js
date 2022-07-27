@@ -73,7 +73,7 @@ const parametrosIniciales=async(accion)=>{
     switch(accion){        
 
         case 'verProduct'  :
-            estoyEn.innerHTML= 'CREAR NUEVO PRODUCTO';
+            estoyEn.innerHTML= 'VER PRODUCTOS';
             funcionActual='verProduct';   
             divCateProd.style.display='block';
             mostrarProductos();
@@ -131,6 +131,7 @@ const parametrosIniciales=async(accion)=>{
         break;  
 
         case 'verCarritos':
+            
             estoyEn.innerHTML= 'Mostrar Todos los Carritos';
             mostrarCarritosCompras(ventasCarrito);
         break;
@@ -170,14 +171,13 @@ const mostrarProductos = () => {
                     "
                     >   
     `;
-
+    console.log('prodObj MOSTRAR',prodObj)
 
     let datas = Object.keys(prodObj); // claves = ["nombre", "color", "macho", "edad"]
 
 
     for(let i=0; i< datas.length; i++){
         let data = datas[i];
-        console.log(prodObj[data]);
 
         const valor=prodObj[data]
         console.log('valor ', valor);

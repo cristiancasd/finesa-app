@@ -64,7 +64,7 @@ const validarJWT = async() => {
     localStorage.setItem('token',tokenDB) //Renuevo el JWT
     usuario=userDb;
     
-    if(userDb.rol!='ADMIN_ROLE'&&userDb.rol!='SALE_ROLE') window.location='index.html'
+    if(userDb.rol!='ADMIN_ROLE'&& userDb.rol!='SALE_ROLE'&& userDb.rol!='USER_ROLE') window.location='index.html'
     
     document.title = 'Shopping '+usuario.name; //El texto de la pestaña de chat.html
 

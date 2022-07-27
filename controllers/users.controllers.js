@@ -42,7 +42,6 @@ const userPost=async (req,res=response)=>{
     })    
 }
 
-
 const usersPut =  async (req, res) =>{
                                                               
     const {id}=req.params;                                //http://localhost:8080/api/usuarios/12  //id va a ser 12 
@@ -57,7 +56,6 @@ const usersPut =  async (req, res) =>{
         user
     });
 }
-
 
 const usersDelete = async (req, res) =>{
     const {id} = req.params;

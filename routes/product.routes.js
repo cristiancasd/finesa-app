@@ -1,16 +1,17 @@
 require('express-validator')
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { crearProducto, actualizarProducto, ProductoDelete, ObtenerProductos, ObtenerProductoID } = require('../controllers/product.controllers');
+const { crearProducto, actualizarProducto, productoDelete, ObtenerProductos, ObtenerProductoID } = require('../controllers/product.controllers');
 const { existeProducto, existeProductoPorID } = require('../helpers/db-validators');
-const { validarCampos, validarJWT, tieneRole, esAdminRole } = require("../middlewares");
+const { validarCampos } = require('../middlewares/validar-campos');
+const { validarJWT } = require('../middlewares/validar-jws');
+const { esAdminRole } = require('../middlewares/validar-roles');
 
 const router=Router();
 
-//Obtener las categorías público
 router.get('/',ObtenerProductos);
 
-//Obtener una por id categoría público, Mongo ID, existencia de ID
+
 router.get('/:id',[
     check('id','No es un ID válido').isMongoId(),
     check('id').custom(existeProductoPorID),  
@@ -18,8 +19,8 @@ router.get('/:id',[
 ],
 ObtenerProductoID); 
 
-//Crear Producto - Validar token, nombre obligatorio, categoria obligatoria
-//categoriaOk, not existeProducto
+
+
 router.post('/',[
     validarJWT,  
     esAdminRole,  
@@ -28,7 +29,6 @@ router.post('/',[
     validarCampos
 ], crearProducto);
 
-//Actualizar - validar token, nombre obligatorio, ID mongo, que exista el id
 router.put('/:id',[
     validarJWT,  
     esAdminRole,  
@@ -39,13 +39,13 @@ router.put('/:id',[
 ],
 actualizarProducto);
 
-// Validad JWT, adminRole, ID mongo, existe producto ID
+
 router.delete('/:id',[ 
-    validarJWT,                                      //Es la primera que se valida, que el token sea correcto
-    esAdminRole,                                   //Solo un rol permitido
-    check('id','No es un ID mongo válido').isMongoId(),    //Revisa que sea un tipo mongo, no revisa si existe en mongo
+    validarJWT,                                    
+    esAdminRole,                                   
+    check('id','No es un ID mongo válido').isMongoId(), 
     check('id').custom(existeProductoPorID),
-    validarCampos                                    //No continua a la ruta si hay un error en los checks
-],ProductoDelete);
+    validarCampos                                    
+],productoDelete);
 
 module.exports= router;

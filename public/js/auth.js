@@ -209,7 +209,7 @@ const verRole=(role,name) =>{
     userLog.innerHTML=`Usuario: ${name}     ROL:  ${role}`
     switch(role){
         case 'USER_ROLE':
-            ventas_rol.style.visibility ='hidden';
+            ventas_rol.style.visibility ='visible';
             admin_rol.style.visibility ='hidden';              break;              
         case 'ADMIN_ROLE':
             ventas_rol.style.visibility ='visible';

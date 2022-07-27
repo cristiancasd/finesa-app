@@ -1,7 +1,6 @@
 const mongoose=require('mongoose');
 require('colors');
 
-//Función conectarse base de datos
 const dbConnection = async() =>{
     try{
         console.log('intentando entrar a la base de datos'.yellow)

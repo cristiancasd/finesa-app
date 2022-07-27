@@ -1,5 +1,4 @@
 const esAdminRole = (req,res,next)=>{
-    console.log('esAdminRole')
     if (!req.user){
         return res.status(500).json({
             msg: 'Se quiere verificar el rol sin el token'
@@ -16,7 +15,7 @@ const esAdminRole = (req,res,next)=>{
 }
 
 
-const tieneRole = (...roles)=>{                             //...roles, crea un arreglo con nombre role de todas las entradas
+const tieneRole = (...roles)=>{                            
     return(req,res,next)=>{                                 
         if (!req.user){
             return res.status(500).json({

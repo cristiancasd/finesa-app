@@ -2,7 +2,6 @@
 const Role=require('../models/rol');
 const User=require('../models/user');
 const Product=require('../models/product');
-const Cart=require('../models/shoppingCart');
 
 
 require('colors')
@@ -14,7 +13,6 @@ const esRoleValido=async(rol='')=>{
     }
 }
 const emailExiste=async(email='')=>{
-    //Comprobar si el correo existe
   const existeEmail=await User.findOne({email});
   console.log('email ----'.green,email);
   console.log('existeEmail ----'.green,existeEmail)
@@ -72,27 +70,9 @@ const coleccionesPermitidas=(coleccion='',colecciones=[])=>{
     throw new Error(`La coleccion ${coleccion} no es permitida, ${colecciones}`)
   }
   console.log('voy a retornar')
-  //next()//para que siga con el siguiente middlewares
   return true;
 }
 
-
-const diaExiste=async(date='')=>{
-  //Comprobar si el correo existe
-  const existeDia=await Cart.findOne({date});
-  console.log('Dia ----'.green,date);
-  console.log('existeDia----'.green,existeDia)
-  if(existeDia){
-    throw new Error('Ya se hay un arreglo-día guardado')
-  }
-}
-
-const existeVentaId=async(id)=> {
-  const existeVenta = await Cart.findById(id);
-  if (!existeVenta){
-    throw new Error('El id no existe en la base de datos')
-  }
-}
 
 module.exports={
     esRoleValido, 
@@ -101,7 +81,4 @@ module.exports={
     existeProducto,
     existeProductoPorID,
     coleccionesPermitidas,
-    diaExiste,
-    existeVentaId
-
 }

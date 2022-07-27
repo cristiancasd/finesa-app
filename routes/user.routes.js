@@ -10,24 +10,28 @@ const { esAdminRole, tieneRole } = require('../middlewares/validar-roles');
 
 const router=Router();
 
-router.get('/', usersGet);                               //Solicitud para mostrar los usuarios
+router.get('/',[
+    validarJWT,  
+    tieneRole('ADMIN_ROLE','SALE_ROLE'),   
+    validarCampos                    
+ ], usersGet);                               
 
 router.post('/',[
     check('name', 'El nombre es obligatorio').not().isEmpty(),
     check('email','El correo no es valido').isEmail(),
     check('email').custom(emailExiste), 
     check('password', 'El password debe tener mínimo 5 caracteres').isLength(6,100),
-    check('rol').custom(esRoleValido),    //es lo mismo que lo de abajo
+    check('rol').custom(esRoleValido),    
     validarCampos
 ] ,userPost );
 
 
 router.delete('/:id',[ 
-    validarJWT,                                      //Es la primera que se valida, que el token sea correcto
-    tieneRole('ADMIN_ROLE'),                         //Escoger el rol permitido
-    check('id','No es un ID válido').isMongoId(),    //Revisa que sea un tipo mongo, no revisa si existe en mongo
+    validarJWT,                                      
+    esAdminRole,                       
+    check('id','No es un ID válido').isMongoId(),    
     check('id').custom(existeUsuarioId),
-    validarCampos                                    //No continua a la ruta si hay un error en los checks
+    validarCampos                                   
 ],usersDelete);
 
 

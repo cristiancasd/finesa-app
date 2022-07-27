@@ -4,7 +4,6 @@ require('colors')
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 
-//async function googleVerify(token='') {             //Recibo el token dado por google
 const googleVerify=async(token='') =>{ 
     console.log("estoy en googleVerifity función asincrona");
 

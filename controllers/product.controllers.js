@@ -25,19 +25,17 @@ const ObtenerProductos=async (req, res=response) => {
     })
 }
 
-// ObtenerProductoID por id- populate{}
 const ObtenerProductoID=async(req, res=response) =>{
     const {id}=req.params;
-    const producto=await Product.findById(id).populate('user','name')
+    const producto=await Product.findById(id).populate('user','nameProduct')
     res.json(producto);
 }
 
-//actualizarProducto
 const actualizarProducto =  async (req, res) =>{
     console.log('actualizarProducto')
     console.log('recibo el request ..',req.params)                                                     
-    const {id}=req.params;                     //Obtengo el ID del enlace, ya está validado
-    const {stateProduct, ...data}=req.body; //No podemos actualizar el esatado ni el usuario. Solo la categoría                                                          
+    const {id}=req.params;                     
+    const {stateProduct, ...data}=req.body;                                                 
     data.nameProduct=data.nameProduct.toUpperCase();     
 
 
@@ -49,15 +47,6 @@ const actualizarProducto =  async (req, res) =>{
 
 }
 
-const actualizarProductoEstado =  async (req, res) =>{
-    console.log('actualizarProductoEstado ',req)                     
-    const {id, ...data}=req
-    console.log('la data sería ',data)
-    console.log('lo que guardo es NEW el request ..'.red,id, data, {new:true})   
-    const producto=await Product.findByIdAndUpdate(id, data, {new:true});
-
-    throw new Error('existente')
-}
 
 const crearProducto= async (req, res=response) => {
 
@@ -65,14 +54,14 @@ const crearProducto= async (req, res=response) => {
     
     let  {productState, user, nameProduct,  ...resto}=req.body
     
-    nameProduct = nameProduct.toUpperCase();                   // Recibo nombre de la categoría
-                   // Recibo nombre de la categoría
+    nameProduct = nameProduct.toUpperCase();                  
+                
        
     console.log('Producto que quiero guardar'.green,nameProduct)
 
 
  
-    const data={                                                            // Objeto con categoría y ID usuario
+    const data={  
         nameProduct,
         ...resto,
         userProduct:req.user._id,
@@ -87,8 +76,7 @@ const crearProducto= async (req, res=response) => {
     res.status(201).json(producto);
 }
 
-//borrar producto - estado:false
-const ProductoDelete = async (req, res) =>{
+const productoDelete = async (req, res) =>{
 
     const {id} = req.params;
     
@@ -102,6 +90,5 @@ module.exports={
     ObtenerProductoID,
     actualizarProducto,
     crearProducto,
-    ProductoDelete,
-    actualizarProductoEstado
+    productoDelete,
 }

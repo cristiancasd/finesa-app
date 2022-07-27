@@ -27,7 +27,7 @@ const ProductSchema= Schema({
         default:""
     },    
     
-    userProduct:{ //Usuario que crea el producto
+    userProduct:{ 
         type: Schema.Types.ObjectId,
         ref: 'User',
         required:true
