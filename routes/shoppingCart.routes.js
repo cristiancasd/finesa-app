@@ -26,10 +26,12 @@ ventasGet);
 
 router.post('/',[
     validarJWT,
+    check('datePrueba', 'El date es obligatorio').not().isEmpty(),
+    check('datePrueba', 'La fecha debe de ser tipo date').isDate(),
     check('arraySale', 'El vector es obligatorio').not().isEmpty(),
     check('date', 'El fecha es obligatorio').not().isEmpty(),
     check('time', 'El fecha es obligatorio').not().isEmpty(),
-    check('rol').custom(esRoleValido),    
+    check('rol').custom(esRoleValido),
     tieneRole('ADMIN_ROLE','SALE_ROLE'),
     validarCampos
 ] ,ventasPost );

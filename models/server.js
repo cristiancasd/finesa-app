@@ -13,8 +13,10 @@ class Server{
             auth: '/api/auth',
             users:'/api/users',
             products:'/api/products',
-            shopingCarts:'/api/shopingCarts',
-            uploads:'/api/uploads'           
+            shoppingcarts:'/api/shoppingcarts',
+            uploads:'/api/uploads',
+            search:'/api/search' 
+
         }
         
        
@@ -45,8 +47,9 @@ class Server{
         this.app.use(this.paths.auth,require('../routes/auth.routes'));      
         this.app.use(this.paths.users,require('../routes/user.routes'));  
         this.app.use(this.paths.products,require('../routes/product.routes'));
-        this.app.use(this.paths.shopingCarts,require('../routes/shoppingCart.routes'));
+        this.app.use(this.paths.shoppingcarts,require('../routes/shoppingCart.routes'));
         this.app.use(this.paths.uploads,require('../routes/upload.routes'));
+        this.app.use(this.paths.search,require('../routes/search.routes'));
         
     }
 

@@ -21,7 +21,7 @@ const button_montarPedido = document.querySelector(`#button_montarPedido`);
 let usuario = null;
 const enlace            =   '/api/auth/' 
 const enlaceProducto    =   '/api/products/'  
-const enlaceVentas      =   '/api/shopingCarts/'  
+const enlaceVentas      =   '/api/shoppingcarts/'  
 
 
 const d=new Date()          //Día de hoy
@@ -285,12 +285,38 @@ const editar_db = async(arreglo) =>{
     let formData={};     
     let enlace='';
     let crud='POST';
+
+    console.log('')
+
+    
     
     let fecha=d.getFullYear()+'-'+(Number(d.getMonth())+1 ) +'-'+ d.getDate()
-
     let hora=d.getHours()+':'+ d.getMinutes()+':'+d.getSeconds()
 
     enlace=enlaceVentas;
+
+
+    const tiempoTranscurrido = Date.now();
+    const hoy = new Date(tiempoTranscurrido);   
+
+      function pad(number) {
+        if (number < 10) {
+          return '0' + number;
+        }
+        return number;
+      }    
+
+    const datePrueba=hoy.getUTCFullYear() +
+        '-' + pad(hoy.getUTCMonth() + 1) +
+        '-' + pad(hoy.getDate())
+        /*+'T' + pad(hoy.getUTCHours()) +
+          ':' + pad(hoy.getUTCMinutes()) +
+          ':' + pad(hoy.getUTCSeconds()) +
+          '.' + (hoy.getUTCMilliseconds() / 1000).toFixed(3).slice(2, 5) +
+          'Z';*/
+
+
+    formData['datePrueba']=datePrueba;
     formData['date']=fecha;
     formData['time']=hora;
     formData['arraySale']=arreglo;

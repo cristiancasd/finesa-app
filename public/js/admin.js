@@ -10,7 +10,7 @@ let usuario = null;
 const enlaceAuth='/api/auth/' 
 const enlaceProducto='/api/products/'      
 const enlaceSubirPC='/api/uploads/' 
-const enlaceCarrito='/api/shopingCarts/' 
+const enlaceCarrito='/api/shoppingcarts/' 
 
 
 

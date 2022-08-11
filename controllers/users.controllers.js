@@ -9,6 +9,7 @@ require('colors')
 
 
 const User=require('../models/user');
+const { sendEmail } = require('../helpers/sendEmail');
 
 
 const usersGet=async (req,res=response)=>{
@@ -28,17 +29,26 @@ const usersGet=async (req,res=response)=>{
 }
 
 const userPost=async (req,res=response)=>{
-
+    let respEmail='valor inicial'
     const {name,email,password, rol} = req.body
     const user=new User({name,email,password, rol});
     
     const passwordCrypt=bcryptjs.genSaltSync();
     user.password=bcryptjs.hashSync(password,passwordCrypt);
     await user.save();
-
+    
+    try{
+        respEmail=await sendEmail({name,email,password, rol})
+        console.log('respEmail ',respEmail)
+    }catch(err){
+        console.log(err);
+        respEmail=err
+    }
+    
     res.json({
         msg:'New User',
-        user
+        user,
+        emailResponde: respEmail
     })    
 }
 

@@ -5,7 +5,7 @@ const { v4: uuidv4 } = require('uuid');
 const subirArchivo=(files,extensionesValidas=['png','jpg','jpeg','gif'],carpeta='')=>{
 
     return new Promise((resolve,reject)=>{
-      console.log('nameArchivo, ',rchivo.name)
+      console.log('nameArchivo, ',archivo.name)
         const {archivo} = files;
         const nombreCortado = archivo.name.split('.'); 
         const extension = nombreCortado[nombreCortado.length-1] 

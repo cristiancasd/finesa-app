@@ -1,6 +1,12 @@
 const {Schema,model}=require('mongoose');
 
 const ShoppingSchema= Schema({
+
+    datePrueba:{
+        type:Date,
+        required:[true,'La Date es obligatoria'],
+    },
+
     date:{
         type:String,
         required:[true,'La fecha es obligatoria'],
